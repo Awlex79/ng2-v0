@@ -1,14 +1,20 @@
-<button class="btn btn-primary" (click)="addCar()">Add a car.</button>
-<p> {{ addCarStatus }} </p>
+<input type="text" class="form-control" [(ngModel)]="carName">
+<button class="btn btn-primary" (click)="addCar()" >Добавить машину</button>
+<p *ngIf="!addCarStatus; else successStatus">Машина не добавлена</p>
+<ng-template #successStatus>
+  <p>Машина добавлена!</p>
+</ng-template>
 <hr>
- <app-car></app-car>
- <app-car></app-car>
+<!-- <app-car *ngFor="let car of cars"></app-car>-->
 
- <hr>
+<ul>
+  <li *ngFor="let car of cars; let idx = index">
+    <div
+      [ngStyle]="{backgroundColor: (idx + 1)% 2 === 0 ? 'pink' : 'grey', color: 'white'}"
+      [ngClass]="{'big-text'}" ]
 
- <input type="text" class="form-control" (keyup.enter) ="onKeyUp($event)" >
-<br>
-<input type="text" class="form-control" [(ngModel)]="inputText" >
-
-
- <p>{{ inputText }}</p>
+    >
+      <b>{{idx+1}}</b> - {{car}}
+    </div>
+  </li>
+</ul>
